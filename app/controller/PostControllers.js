@@ -1,19 +1,18 @@
-
-
-
-app.controller('myController', function ($scope, $http) {
-
-
-$scope.insert = function() {
-
-      var info = $http({
-        method: "POST",
-        url: URL + "insert_data.php",
-        data: {
-            name: $scope.name,
-           email: $scope.email,
-            age: $scope.age,
-            
-        } ); 
+var app =angular.module("insert",[]);
+app.controller('myController', function ($scope, $http) {  
+    $scope.insert= function() {
+      $http.post(
+             "api/insert_data.php",{
+              'name': $scope.name,
+               'email': $scope.email,
+                'age': $scope.age,
+                'time':$scope.time,
+            }).then (function(data){
+            $scope.name = null;
+            $scope.email = null;
+            $scope.age=null;
+            $scope.time=null;
+            });
     }
-}); 
+    }); 
+   
